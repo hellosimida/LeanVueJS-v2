@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+一、npm install --save-dev css-loader、npm install style-loader --save-dev、npm install --save-dev less-loader less<br>
+二、在webpack.config.js.module: {
+rules: [
+{
+test: /\.css$/,
+use: [ {
+loader: "style-loader" // creates style nodes from JS strings
+}, {
+loader: "css-loader" // translates CSS into CommonJS
+}, {
+loader: "less-loader" // compiles Less to CSS
+}]
+}
+]
+}<br>
+三、
+<div id="app">
+  <h2>{{message}}</h2>
+</div>
+<script src="./dist/bundle.js"></script>
+</body>
+</html>
