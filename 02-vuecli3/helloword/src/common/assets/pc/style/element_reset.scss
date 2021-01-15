@@ -1,0 +1,318 @@
+@import "common";
+
+/************* 消除 element 默认样式 ***********/
+
+// 清除所有popover的内边距
+.el-popover {
+  padding: 0;
+}
+
+///输入框的按钮
+.el-input-group__append {
+  background: $theme-color;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+}
+
+.el-form-item__label{
+  font-size: 18px;
+}
+.el-form-item__error{
+  font-size: 16px;
+}
+// 输入框
+.el-input.is-disabled .el-input__inner {
+  background-color: $background-color;
+  border-color: $border-grey;
+}
+
+.el-input__inner {
+  border-color: $border-grey;
+  font-size: $text-xxl;
+
+  &:hover {
+    border-color: $border-grey;
+  }
+
+  &:focus-within {
+    border-color: $border-grey;
+  }
+}
+
+.el-input-center .el-input__inner {
+  text-align: center;
+}
+
+.el-input.clear {
+  border: none;
+  padding: 0;
+}
+
+.el-input__icon {
+  font-size: 20px;
+}
+
+// 数字输入框
+.el-input-number {
+  width: 100%;
+
+  .el-input-number__decrease, .el-input-number__increase {
+    background-color: transparent;
+    color: $text-color-grey;
+
+    &:hover {
+      color: $text-color-red;
+    }
+  }
+
+  .el-input-number__decrease:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled), .el-input-number__increase:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+    border-color: $border-grey;
+  }
+}
+
+// 级联选择器
+.el-cascader {
+  width: 100%;
+
+  .el-input .el-input__inner:focus, .el-input.is-focus .el-input__inner {
+    border-color: $border-grey;
+  }
+}
+
+// 公用列表
+.common-table {
+  background-color: transparent;
+  font-size: $text-lg;
+  color: black;
+  font-weight: bold;
+
+  thead{
+    color: $text-color-black;
+  }
+
+  .el-table__header-wrapper {
+    border-radius: $card-radius $card-radius 0 0;
+    background: #c9f4f5;
+    box-shadow: 0 0 5px 0 rgba(68, 78, 88, 0.1);
+
+    tr, th {
+      background-color: transparent;
+    }
+
+    .caret-wrapper {
+      height: 22px;
+
+      .sort-caret.ascending {
+        top: 0;
+      }
+
+      .sort-caret.descending {
+        bottom: 0;
+      }
+    }
+
+    .ascending .sort-caret.ascending {
+      border-bottom-color: $common-blue;
+    }
+
+    .descending .sort-caret.descending {
+      border-top-color: $common-blue;
+    }
+  }
+
+  .el-table__body-wrapper {
+    table {
+      border-collapse: separate;
+      border-spacing: 0 10px;
+    }
+
+    .el-table__row {
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 3px 0 rgba(68, 78, 88, 0.1);
+
+      td {
+        border-bottom: none;
+        height: 40px;
+      }
+
+      .button-layout {
+
+        .cell {
+          overflow: visible;
+        }
+      }
+    }
+  }
+}
+
+// 交易列表
+.trade-table {
+  background-color: transparent;
+  font-size: 17px;
+  color: black;
+  font-weight: bold;
+
+  thead{
+    color: $text-color-black;
+  }
+  // mini 样式
+  &.el-table--mini {
+    font-size: $text-md;
+
+    .el-table__fixed-header-wrapper, .el-table__header-wrapper {
+      font-size: $text-md;
+    }
+  }
+
+  .el-table__fixed-header-wrapper, .el-table__header-wrapper {
+    background: #c9f4f5;
+
+    tr, th {
+      background-color: transparent;
+    }
+  }
+
+  .el-table__fixed-body-wrapper, .el-table__body-wrapper {
+
+    .el-table__row {
+      background: rgba(255, 255, 255, 0.7);
+
+      &.mark-row {
+        background-color: #EEBBBB;
+      }
+
+      td {
+        height: 40px;
+      }
+
+      .button-layout {
+
+        .cell {
+          overflow: visible;
+        }
+      }
+
+      .red-text {
+        color: red;
+      }
+    }
+  }
+
+
+}
+
+// 去掉table column 右边距
+.el-table th > .cell {
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+.el-table .cell {
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+// dialog 弹窗
+
+.el-dialog {
+  border-radius: $card-radius;
+}
+
+.el-dialog__header {
+  height: 50px;
+  padding: 0;
+  background-color: $theme-color;
+  border-radius: $card-radius $card-radius 0 0;
+  border-bottom: 1px $divider-color solid;
+
+  .el-dialog__title {
+    color: white;
+    line-height: 50px;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .el-dialog__headerbtn {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: $text-lg;
+    color: white;
+
+    &:hover .el-dialog__close {
+      color: white;
+    }
+  }
+
+  .el-dialog__close {
+    color: white;
+    transform: scale(1.5);
+  }
+
+}
+
+.el-dialog__body {
+  padding: 0;
+  color: $text-color-black;
+}
+
+// 分页组件
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: $theme-color;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: $theme-color;
+  color: white;
+}
+
+// 加载组件，修改颜色
+.el-loading-spinner .path {
+  stroke: $theme-color;
+}
+
+// 数字输入框
+.theme-number-input {
+
+  .el-input-number__decrease, .el-input-number__increase {
+    background-color: $theme-color;
+    color: white;
+  }
+  .el-input {
+    input {
+      font-size: 40px;
+    }
+  }
+}
+
+// Message Box 样式
+.el-message-box {
+  .el-message-box__title {
+    color: $text-color-theme;
+  }
+
+  .el-message-box__btns {
+
+    .el-button:hover, .el-button:focus {
+      border-color: #DCDFE6;
+      color: #606266;
+      background-color: white;
+    }
+
+    .el-button--primary {
+      background-color: $common-blue;
+      border-color: $common-blue;
+
+      &:hover, &:focus {
+        background-color: $common-blue;
+        border-color: $common-blue;
+        color: white;
+      }
+    }
+  }
+}

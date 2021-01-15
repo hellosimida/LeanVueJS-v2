@@ -1,0 +1,257 @@
+@import "space";
+/************* 颜色定义 **************/
+$theme-color: #3DCCCC;
+$theme-light-color: #ccffff;
+$background-color: #f2f6fc;
+$divider-color: #dbdbdb;
+$border-grey: #e6e6e6;
+
+$common-red: #b23843;
+$common-blue: #01758e;
+
+$text-color-theme: #01758e;
+$text-color-grey: #666666;
+$text-color-black: #000000;
+$text-color-red: #bf2e45;
+
+/************* 尺寸定义 **************/
+// 定义常用圆角
+$card-radius: 10px;
+
+// 定义按钮圆角
+$button-radius: 6px;
+
+/************* 字体定义 **************/
+
+$text-xxl: 20px;
+$text-xl: 18px;
+$text-lg: 16px;
+$text-md: 14px;
+$text-sm: 12px;
+
+/************* 公用@mimix ***********/
+
+// 横向布局
+@mixin flex-row($align-item:initial,$justify-content:initial) {
+  display: flex;
+  display: -ms-flexbox; /* IE 10 */
+  flex-direction: row;
+  -ms-flex-direction: row; /* IE 10 */
+  justify-content: $justify-content;
+  -ms-flex-pack: $justify-content; /* IE 10 */
+  align-items: $align-item;
+  -ms-flex-align: $align-item; /* IE 10 */
+  flex-basis: auto;
+}
+
+// 纵向布局
+@mixin flex-column($align-item:initial,$justify-content:initial) {
+  display: flex;
+  display: -ms-flexbox; /* IE 10 */
+  flex-direction: column;
+  -ms-flex-direction: column; /* IE 10 */
+  justify-content: $justify-content;
+  -ms-flex-pack: $justify-content; /* IE 10 */
+  align-items: $align-item;
+  -ms-flex-align: $align-item; /* IE 10 */
+  flex-basis: auto;
+}
+
+/************* 样式定制 ***********/
+
+html, body {
+  background-color: $background-color; // 定义PC全局默认背景
+  font-size: $text-lg; // 此处定义PC全局默认字体大小
+  color: $text-color-black; // 此处定义PC全局默认字体颜色
+}
+
+// 100%高度
+.full-height {
+  height: 100%;
+}
+
+// 100%宽度
+.full-width {
+  width: 100%;
+}
+
+// 默认card样式
+.card-white {
+  background-color: white;
+  border-radius: $card-radius;
+  box-shadow: 0 0 9px 0 rgba(68, 78, 88, 0.1);
+}
+
+
+// 单行文本超出宽度用省略号
+.text-overflow-ellipsis {
+  overflow: hidden; /*设置超出的部分进行影藏*/
+  text-overflow: ellipsis; /*设置超出部分使用省略号*/
+  white-space: nowrap;
+}
+
+// 两行文本超出宽度用省略号
+.text-overflow-ellipsis-two-line {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+// 按钮样式
+.submit-button {
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  color: white;
+  font-size: $text-lg;
+  background-color: $theme-color;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+
+  &:focus {
+    opacity: 0.8;
+  }
+
+  &.blue{
+    background-color: $common-blue;
+  }
+
+  &.red {
+    background-color: $common-red;
+  }
+
+  &.grey {
+    background-color: #949495;
+  }
+}
+
+// 公用tab
+$common-tab-height: 40px;
+.common-tab {
+  height: $common-tab-height;
+  background-color: white;
+  border-radius: $card-radius $card-radius 0 0;
+  border-bottom: 1px solid $divider-color;
+  box-sizing: border-box;
+  @include flex-row(center);
+
+  .tab-item {
+    height: 32px;
+    line-height: 30px;
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: $text-lg;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 $spacing-10;
+
+    &.selected{
+      border-bottom: 2px $common-blue solid;
+    }
+  }
+}
+
+//公用tabs
+.commodity-filter {
+  .el-tabs--card>.el-tabs__header {
+    border: none;
+    margin-bottom: 0px;
+
+    .el-tabs__nav{
+      border: none;
+    }
+    .el-tabs__item:first-child{
+      border: none;
+    }
+
+    .el-tabs__item{
+      padding: 0 10px !important;
+
+      border: none;
+      background-color: white;
+      box-shadow: 0 0 5px 0 rgba(68, 78, 88, 0.1);
+      height: 30px;
+      line-height: 30px;
+      margin-right:10px;
+      color: $text-color-theme;
+
+      .el-icon-close{
+        width: 20px !important;
+        height: 20px !important;
+        line-height: 20px !important;
+        font-size: 20px;
+      }
+
+    }
+    .el-tabs__nav-wrap {
+      height: 45px;
+      line-height: 45px;
+    }
+  }
+}
+
+// 选项框
+.check-box{
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 9px;
+  box-shadow: 0 0 5px 0 rgba(68, 78, 88, 0.3);
+
+  .selected{
+    margin: 4px 0 0 4px;
+    width: 10px;
+    height: 10px;
+    background-color: $common-red;
+    border-radius: 5px;
+
+    &.blue{
+      background-color: $common-blue;
+    }
+  }
+}
+
+// 列表按钮
+.table-button {
+  display: inline-block;
+  width: 60px;
+  height: 24px;
+  font-size: $text-sm;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: white;
+  border: 1px $common-blue solid;
+  color: $text-color-theme;
+  cursor: pointer;
+  box-shadow: 0 0 5px 0 rgba(68, 78, 88, 0.5);
+
+  &.red{
+    border-color: $common-red;
+    color: $common-red;
+  }
+  &.gray{
+    border-color: gray;
+    color: gray;
+  }
+
+  &.red-solid{
+    background-color: red;
+    color: white;
+    border-color: transparent;
+  }
+
+  &.large{
+    width: 80px;
+    height: 36px;
+    font-size: 18px;
+    border-radius: 40px;
+    line-height: 36px;
+  }
+}
+
+

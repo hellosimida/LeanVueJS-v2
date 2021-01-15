@@ -1,0 +1,229 @@
+@import "common";
+
+/************* 消除 vant 默认样式 ***********/
+// 标题栏
+.van-nav-bar {
+  background-color: $background-color;
+
+  .van-nav-bar__title {
+    font-size: $text-xl;
+    color: $text-color-value;
+    font-weight: bold;
+  }
+
+  .van-nav-bar__text {
+    color: $text-color-black;
+  }
+
+  .van-icon {
+    color: $text-color-black;
+  }
+
+  .van-nav-bar__left {
+    opacity: 1;
+  }
+
+  .van-nav-bar__right {
+    opacity: 1;
+  }
+}
+
+.van-nav-bar.theme {
+  background-color: $theme-color;
+
+  .van-nav-bar__title {
+    color: white;
+    font-weight: normal;
+  }
+
+  .van-nav-bar__text {
+    color: white;
+  }
+
+  .van-icon {
+    color: white;
+  }
+}
+
+.van-nav-bar.van-hairline--bottom::after {
+  border-bottom-width: 0;
+}
+
+.van-dropdown-menu__bar {
+  height: 46px;
+}
+
+// 输入框
+.van-cell.van-field {
+  padding: 0;
+  height: 40px;
+  border: 0px solid #c5cfd5;
+  border-radius: $button-radius;
+  align-items: center;
+  box-sizing: border-box;
+
+  .van-cell__value, .van-field__body {
+    height: 100%;
+  }
+
+  // 输入框左侧图标
+  .van-field__left-icon {
+    color: $text-color-grey;
+    font-size: $text-lg;
+    margin-left: $spacing-5;
+    margin-right: 0;
+  }
+
+  .van-field__right-icon {
+    margin-right: 0;
+  }
+
+  input {
+    height: 40px;
+    padding: 0 $spacing-5;
+  }
+
+  &.no-padding{
+    input{
+      padding: 0;
+    }
+  }
+}
+
+.van-field--disabled {
+  background-color: $background-color;
+
+  input:disabled {
+    color: $text-color-black;
+  }
+}
+
+// 清除样式的输入框
+.van-cell.van-field.clear {
+  border: none;
+  background-color: transparent;
+}
+
+// 去掉边框，内边距
+.van-cell.van-field.clear {
+  border: none;
+  padding: 0;
+}
+
+// 去掉cell分割线
+.van-cell.van-field:not(:last-child)::after {
+  border: none;
+}
+
+// 按钮
+.van-button {
+  color: $text-color-red;
+  border: none;
+  border-radius: $button-radius;
+}
+
+// tab
+.van-tabs {
+
+  &.center {
+    .van-tabs__nav {
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+
+  .van-tabs__nav {
+    background-color: transparent;
+
+    .van-tabs__line {
+      background-color: $text-color-theme;
+      height: 4px;
+      border-radius: 2px;
+    }
+  }
+
+  .van-hairline--top-bottom::after {
+    border: none;
+  }
+
+  .van-tab {
+    color: $text-color-grey;
+    font-weight: bold;
+    font-size: $text-lg;
+  }
+
+  .van-tab.van-tab--active {
+    color: $text-color-value;
+  }
+}
+
+
+// tabbar
+.van-tabbar {
+  background: url("~@/common/assets/mobile/image/bg-tabbar.png") no-repeat;
+  background-size: 100% 50px;
+
+  &.van-hairline--top-bottom::after{
+    border-width: 0;
+  }
+
+  .van-tabbar-item {
+    color: #492845;
+  }
+  .van-tabbar-item:nth-child(2){
+    background-color: transparent;
+  }
+
+  .van-tabbar-item.van-tabbar-item--active {
+    color: $common-blue;
+  }
+}
+
+//popup关闭按钮
+.van-popup__close-icon--top-right {
+  top: $spacing-5;
+  right: $spacing-5;
+}
+
+.van-popup__close-icon {
+  color: white;
+}
+
+// 弹窗取消按钮
+.van-dialog__cancel {
+  color: $text-color-grey;
+}
+
+//下拉菜单阴影
+.van-dropdown-menu__bar {
+  box-shadow: none;
+}
+
+// 列表筛选时用的小号下拉组建
+.van-dropdown-menu.mini {
+  .van-dropdown-menu__title {
+    font-size: 12px;
+    color: $text-color-grey;
+  }
+}
+
+// 修改步进器输入框大小
+.van-stepper__input {
+  font-size: 16px;
+}
+
+//步进器按钮背景颜色
+.theme-number-input {
+  input{
+    font-size: 20px;
+  }
+  .van-stepper__plus {
+    color: white;
+    background-color: $theme-color;
+  }
+
+  .van-stepper__minus {
+    color: white;
+    background-color: $theme-color;
+  }
+}
