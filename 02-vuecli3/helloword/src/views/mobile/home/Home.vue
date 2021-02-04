@@ -23,7 +23,7 @@
       </template>
       <template v-slot:searchCatgory v-if="isOpen">
         <van-grid :column-num="5">
-          <van-grid-item v-for="value in 10" :key="value" icon="photo-o" text="文字" />
+          <van-grid-item v-for="category in categorys" icon="" text="">{{category.CN}}</van-grid-item>
         </van-grid>
       </template>
       <template v-slot:isOpen>
@@ -31,26 +31,29 @@
       </template>
     </search-vue>
     </van-sticky>
-    <div>
-      <home-content :cmovies="movies"></home-content>
-    </div>
+    <refresh-list class=""
+                  :refreshing.sync="refreshing"
+                  :loading.sync="isLoading"
+                  :error.sync="isError"
+                  finishedText=""
+                  :finished="finished"
+                  @load="loadHome"
+                  @refresh="onRefresh"
+                  :offset-height="174"
+                  :count="movies.length"
+                  :item-height="150">
+      <div v-for="cmovies in movies">
+        <home-content :cmovies="cmovies"></home-content>
+      </div>
+    </refresh-list>
   </div>
 </template>
 
 <script>
   import SearchVue from '@/components/mobile/home/Search.vue'
   import HomeContent from '@/components/mobile/home/HomeContent.vue'
+  import RefreshList from "@/common/widget/mobile/RefreshList";
   import Vue from 'vue'
-  import { Search } from 'vant';
-  import { Grid, GridItem } from 'vant';
-  import { Sticky } from 'vant';
-  import { Button } from 'vant';
-
-  Vue.use(Button);
-  Vue.use(Sticky);
-  Vue.use(Grid);
-  Vue.use(GridItem);
-  Vue.use(Search);
   export default {
     name: 'Home',
     data(){
@@ -58,31 +61,56 @@
         value: '',
         message: '展开全部分类',
         isOpen: false,
-        movies: []
+        categorys: [],
+        movies: [],
+        isLoading: true,
+        isError: false,
+        finished: false,
+        refreshing: false,
+        recordCount: 0
       }
     },
     components: {
       SearchVue,
-      HomeContent
+      HomeContent,
+      RefreshList
     }
     ,
     methods:{
-      async init(){
-        let response = await Vue.prototype.httpCommunicate.request('/frontend/webHttpServlet','recommend_query',{
-          PN:1,
-          PS:6,
-          ISS:1,
-          SV:'ID'
+      async loadData(){
+        let response = await Vue.prototype.httpCommunicate.request('/frontend/webHttpServlet','category_query',{
         })
-        console.log('=========================='+response.RESULT.RETCODE);
         if (response.RESULT.RETCODE!=0){
           alert(response.RESULT.MESSAGE);
           return;
         }
-        this.movies = response.RESULTLIST.REC;
+        this.categorys = response.RESULTLIST.REC;
+      },
+      async loadHome(){
+        this.isLoading = true;
+        this.isError = false;
+        let response = await Vue.prototype.httpCommunicate.request('/frontend/webHttpServlet','home_query',{
+        })
+        if (response.RESULT.RETCODE!=0){
+          alert(response.RESULT.MESSAGE);
+          this.isError = true
+          return;
+        }
+        this.movies = response.RESULTLIST;
+        this.recordCount = parseInt(response.RESULT.TC)
+        this.finished = this.movies.length >= this.recordCount;
+        if(this.finished){
+          this.isLoading = false;
+          this.refreshing = false;
+        }
       },
       onSearch(val) {
-        console.log(val);
+        this.$router.push("/home/categoryDetail");
+      },
+      onRefresh() {
+        this.refreshing = true;
+        this.categorys = [];
+        this.loadHome();
       },
       isOpenClick(){
         if (this.isOpen){//==true时表示收起
@@ -95,7 +123,8 @@
       }
     },
     created(){
-      this.init();
+      this.loadData();
+      this.loadHome();
     }
   }
 </script>

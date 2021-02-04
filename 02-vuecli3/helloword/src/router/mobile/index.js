@@ -3,6 +3,7 @@ const Home = () => import('@/views/mobile/home/Home.vue')
 const Shop = () => import('@/views/mobile/shop/Shop.vue')
 const Storecar = () => import('@/views/mobile/storecar/Storecar.vue')
 const User = () => import('@/views/mobile/user/User.vue')
+const CategoryDetail = () => import('@/views/mobile/home/CategoryDetail.vue')
 
 export default [
   {
@@ -21,6 +22,13 @@ export default [
     path: '/home',
     name: '',
     component: Home,
+    children: [{
+      path: '/categoryDetail',
+      component: CategoryDetail,
+      meta: {
+        title: '分类详情'
+      }
+    }],
     meta:{
       title: '首页'
     }

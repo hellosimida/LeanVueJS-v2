@@ -249,7 +249,7 @@ export default {
     initStyle() {
         if (this.isMobile) {
             let vant = require('vant');
-            Vue.component(vant);
+            Vue.use(vant);
             // 引入 vant 样式
             require('vant/lib/index.css');
             // 引入自定义手机端样式
@@ -260,7 +260,7 @@ export default {
             require('./assets/mobile/icon/iconfont.css');
         } else {
             let element = require('element-ui');
-            Vue.component(element);
+            Vue.use(element);
             // 引入 element 样式
             require('element-ui/lib/theme-chalk/index.css')
             // 引入自定义PC端样式

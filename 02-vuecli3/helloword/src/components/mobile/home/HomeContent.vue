@@ -1,34 +1,61 @@
 <template>
   <div class="content">
+
     <div class="content-title">
-      <div class="content-title-left">分类名称</div>
-      <div class="content-title-right">查看更多</div>
+      <div class="content-title-left">{{cmovies.obj.CN}}</div>
+      <div class="content-title-right" @click="viewMore(cmovies.obj.CID)">查看更多</div>
     </div>
-    <div class="content-info" v-for="movies in cmovies">
-      <div class="content-div">
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608547804761&di=5b75b7c3c1dbaf528cd728f175305256&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F18%2F20181118142953_yaktg.thumb.700_0.jpeg"/>
-        <div>{{movies.T}}</div>
+    <div class="content-info" v-for="(movies,index) in cmovies.REC">
+      <div class="content-div" v-if="index%2==0">
+        <div><img :src="cmovies.REC[index].FAP"/></div>
+        <div>{{cmovies.REC[index].T | ellipsis}}</div>
       </div>
-      <div class="content-div">
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608547804761&di=5b75b7c3c1dbaf528cd728f175305256&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F18%2F20181118142953_yaktg.thumb.700_0.jpeg"/>
-        <div>aaa</div>
+      <div class="content-div" v-if="index%2==0">
+        <div><img :src="cmovies.REC[index].FAP"/></div>
+        <div>{{cmovies.REC[index+1].T | ellipsis}}</div>
       </div>
     </div>
+
+
   </div>
 </template>
 
 <script>
-  import HomeContentBar from '@/components/mobile/home/HomeContentBar.vue'
+
   export default {
     name: 'HomeContent',
     components: {
-      HomeContentBar
+
+    },
+    data() {
+      return {
+
+      }
     },
     props: {
       cmovies: {//2.5.17版本后必须这样将default封装成一个函数
-        type: Array,
+        type: Object,
         default(){
-          return []
+          return {}
+        }
+      }
+    },
+    methods: {
+      viewMore(categoryID){
+        console.log(categoryID);
+      }
+    }
+    ,
+    filters: {
+      ellipsis(value){
+        if (!value){
+          return "";
+        }
+
+        if(value.length > 9){
+          return value.slice(0,8)+'...';
+        }else {
+          return value;
         }
       }
     }
@@ -40,11 +67,11 @@
     margin: 10px 10px 10px 10px;
     .content-info{
       display: flex;
-      margin-top: 30px;
+      margin-top: 15px;
       .content-div{
         width: 45%;
         text-align: center;
-        height: 190px;
+        height: 200px;
         margin-left: 4%;
         margin-right: 4%;
 
